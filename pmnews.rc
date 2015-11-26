@@ -1,0 +1,169 @@
+
+#include <os2.h>
+#include "pmnews.h"
+
+ICON    ID_WINDOW pmnews.ico
+
+
+
+MENU  ID_MENUBAR PRELOAD
+
+  BEGIN
+
+    MENUITEM "Headers", IDM_RETHDRS
+    MENUITEM "Next", IDM_NEXTART
+    MENUITEM "Prev", IDM_PREVART
+    MENUITEM "Unread", IDM_NEXTUNR
+
+    SUBMENU "Mail",      IDM_MAIL
+    BEGIN
+        MENUITEM "Reply",       IDM_REPLY
+        MENUITEM "Mail Article",    IDM_MAILART
+    END
+
+    SUBMENU "Post",      IDM_POST
+    BEGIN
+        MENUITEM "Follow Up",    IDM_FOLLOWUP
+        MENUITEM "New Post",    IDM_NEWPOST
+    END
+    MENUITEM "Print", IDM_PRINT
+    MENUITEM "Save", IDM_SAVED
+
+  END
+
+
+
+WINDOWTEMPLATE IDD_GLIST LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+
+
+  DIALOG  "PMNews", IDD_GLIST, 40, 40, 220, 193, ,
+        FCF_DLGBORDER | FCF_TITLEBAR | FCF_SYSMENU | FCF_BORDER | FCF_TASKLIST
+
+  BEGIN
+
+    CONTROL     "",  FID_CLIENT, 0, 0, 0, 0,
+                     WC_STATIC, SS_TEXT | WS_GROUP
+    PUSHBUTTON  "Help",     IDH_GHELP,   127, 176,  30,   17, BS_HELP | BS_NOPOINTERFOCUS
+    PUSHBUTTON  "Mark",     IDD_GMARK,   157, 176,  30,   17
+    PUSHBUTTON  "Search",   IDD_SEARCH,  187, 176,  35,   17
+    CTEXT      "News Groups", 0,           0, 175,  127,  19
+
+
+    LISTBOX         IDD_GRLIST, 0,   0, 219, 178
+
+  END
+
+END
+
+WINDOWTEMPLATE IDD_HLIST LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+
+
+  DIALOG  "", 0, 0, 30, 320, 165,, FCF_DLGBORDER | FCF_TITLEBAR | FCF_SYSMENU
+
+  BEGIN
+
+    LTEXT   "Thread Header List", 0,    8, 155,  96,    8
+    PUSHBUTTON  "Mark",   IDD_HMARK,  200, 145,  27,   17
+    PUSHBUTTON  "Open",   IDD_HOPEN,  227, 145,  27,   17
+    LTEXT   "Group:"             -1,    8, 140,  27,    8
+    LTEXT   ""            IDD_GNAME,   48, 140, 144,    8
+    LISTBOX               IDD_HRLIST,   2,   0, 318,  140
+
+
+  END
+
+END
+
+DLGTEMPLATE IDD_SUBBOX  LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+
+
+  DIALOG  "Select Group/Subject", IDD_SUBBOX, 20, 20, 220, 100, WS_VISIBLE,
+        FCF_DLGBORDER | FCF_BORDER | FCF_TITLEBAR
+
+  BEGIN
+
+    PUSHBUTTON  "OK",        IDE_GSOK,  172,  80,  24,   12
+    PUSHBUTTON  "Can",       IDE_GSCAN, 196,  80,  24,   12
+    LTEXT      "News Group", 0,           5,  62,  80,   16
+    ENTRYFIELD "",           IDE_GROUP,   5,  46,  180,  16
+    LTEXT      "Subject",    0,           5,  28,  80,   16
+    ENTRYFIELD "",           IDE_SUBJ,    5,  12,  180,  16
+
+  END
+
+END
+
+DLGTEMPLATE IDD_MAILBOX  LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+
+  DIALOG  "Select Mail Address", IDD_MAILBOX, 20, 20, 320, 200, WS_VISIBLE,
+        FCF_DLGBORDER | FCF_BORDER | FCF_TITLEBAR
+
+  BEGIN
+
+    PUSHBUTTON  "OK",        IDE_GSOK2,  270, 180,  24,   12
+    PUSHBUTTON  "Can",       IDE_GSCAN2, 296, 180,  24,   12
+    LTEXT      "Addressee",  0,           5,  160, 80,   16
+    ENTRYFIELD "",           IDE_MAILADR, 5,  145, 180,  16
+    LISTBOX                  IDD_MAILIST, 0,   0, 300,  140
+
+  END
+
+END
+
+DLGTEMPLATE IDD_SRCHBOX  LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+
+  DIALOG  "Enter Search String", IDD_SRCHBOX, 20, 20, 220, 52, WS_VISIBLE,
+        FCF_DLGBORDER | FCF_BORDER | FCF_TITLEBAR
+
+  BEGIN
+
+    PUSHBUTTON  "OK",        IDE_SBOK,  5, 40,   24,   12
+    PUSHBUTTON  "Can",       IDE_SBCAN, 40, 40,   24,   12
+    AUTOCHECKBOX    "Case Sensitive", IDE_SBCASE, 88, 40, 80, 12
+    ENTRYFIELD "",           IDE_SRCHSTR, 5,  12,  160,  12
+
+  END
+
+END
+
+/*************************/
+/* Help Table Definition */
+/*************************/
+HELPTABLE IDH_MAIN
+  BEGIN
+  HELPITEM IDD_HLIST, HEADER_SUBTABLE, 0001
+  HELPITEM IDD_GLIST, GROUP_SUBTABLE, 0002
+  HELPITEM ID_MENUBAR, ARTICLE_SUBTABLE, 0003
+  END
+
+/******************************/
+/* Help Sub Table Definitions */
+/******************************/
+HELPSUBTABLE GROUP_SUBTABLE
+  BEGIN
+  HELPSUBITEM IDD_GMARK,     0013
+  HELPSUBITEM IDD_SEARCH,    0012
+  HELPSUBITEM IDD_GRLIST,    0010
+  END
+
+HELPSUBTABLE HEADER_SUBTABLE
+  BEGIN
+  HELPSUBITEM IDD_HMARK,     0013
+  HELPSUBITEM IDD_HRLIST,    0014
+  END
+
+HELPSUBTABLE ARTICLE_SUBTABLE
+  BEGIN
+  HELPSUBITEM IDM_MAIL,      0017
+  HELPSUBITEM IDM_POST,      0014
+  HELPSUBITEM IDM_PRINT,     0016
+  HELPSUBITEM IDM_SAVED,     0015
+  END
+
+
+

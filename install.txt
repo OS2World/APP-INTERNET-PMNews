@@ -1,0 +1,95 @@
+Some notes for PMNews ---
+
+This program is a PM replacement for SNEWS.EXE, which means that
+you need the rest of Rommel's port or McCombs code plus UUPC
+to comtemplate using it.
+
+The usual disclaimer is in effect:  no warranty, expressed or
+implied accompanies this code; if all your data, programs, and
+power-supply are destroyed by this program, I'm not liable.
+
+Install the .exe and .ico files in a convenient subdirectory
+and create a WPS object which invokes it, specifying the residence
+directory as the working directory.
+In your PERSONAL.RC file, be sure that Editor and Aliases are
+specified with their full path and extension.
+The environment variables UUPCSYSRC, UUPCUSRRC, and UUPCNEWS
+must be available (usually means set in config.sys).
+The SNEWS suite of programs should be available in the config.sys
+PATH.
+
+Source code will be forthcoming if there's enough interest and
+I find the time to clean up the horrible mess (first PM attempt).
+It's evident that just because a program is a GUI object does not
+mean that it is easier to use than a character-based application.
+Knowing  what I now know of PM, a rewrite would improve this.
+
+
+The program builds a .INI file after the first run, containing the
+locations of the group list dialog box and article window position
+and size.
+
+You'll note that PMNews creates a file pmnews.err whenever it runs.
+When an error occurs this file will contain some cryptic 'fprintf'
+information relevant to the error (if we're lucky).
+
+There is currently no useful 'unread' article behavior for the
+program.  When a thread is opened, the first article is always
+displayed, not the first unread.  Both approaches should be supported
+perhaps via a mouse double-clicking option.
+
+There is no font support, so system proportional is what there is.
+This is particularly ugly in the mail-article listbox.
+
+Send me e-mail for suggestions, complaints, etc.
+
+
+E-mail:  serls@dashs.denver.co.us
+
+
+Change log:
+
+   11/23/92
+   Release 0.1  --  re-link with multi-thread libs
+                    add SNEWS style TAB/ESC/PGDN/PGUP/arrow keys
+                        for article window.
+                    Try to put real name of author on title bar.
+
+   12/06/92
+   Release 0.2 --   primitive text search
+                    make header dialog select (double-click) acquire
+                        the first unread article.
+                    right-button on selected header gets 1st entry
+                        (but not in foreground!).
+                    On 101 keyboard, keypad plus and enter for
+                       next-unread and next article.
+   12/12/92
+   Release 0.3 --   fix search to allow post/mail
+                    implement 'prev' for previous article
+                       and map it to keypad '-'.
+   12/20/92
+   Release 0.4 --   was not erasing post.tmp file
+                    various bugs with multiple postings
+   02/08/93
+   Release 0.5 --   more elegant threading (might be slower).
+
+   08/27/93
+   Release 0.6 --   releasing the source.  Note that there are
+                    duplicate SNEWS-named files:  active.c, history.c
+                                                  active.h, history.h
+                                                  defs.h
+                    these files are similar, but NOT quite the same
+                    as the originals.  Use another directory!
+                    Also, 2 threaders are provided (pmnthrd.c == original,
+                    pmmthrd.c is an adjustable threader, or provide a
+                    reference threader, please).
+   12/12/93
+   Release 0.7 --   provide some decent diagnostics for the error
+                    "Unable to load RC data".  Change from "***" to
+                    "---" for zero article value.
+   06/07/94
+   Release 0.8 --   help from group window (poor)
+                    change mouse button 2 to 'next unread thread'
+                      in header list
+                    provide case/in/sensitivity to group text search
+                    fix some small annoying things (group window seal)

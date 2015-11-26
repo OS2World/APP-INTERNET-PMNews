@@ -1,0 +1,7 @@
+
+       OS/2 Upload Information Template for ftp-os2.nmsu.edu
+
+Program Description [ PMNews: PM front end for SNEWS/UUPC ]
+
+Program Source:     serls@dashs.denver.co.us
+Proposed directory  os2/2.0/network/
